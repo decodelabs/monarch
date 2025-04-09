@@ -11,6 +11,7 @@ use DecodeLabs\Monarch\Context as Inst;
 use DecodeLabs\Monarch\Paths as PathsPlugin;
 use Psr\Container\ContainerInterface as ContainerPlugin;
 use DecodeLabs\Veneer\Plugin\Wrapper as PluginWrapper;
+use DecodeLabs\Monarch\EnvironmentMode as Ref0;
 
 class Monarch implements Proxy
 {
@@ -27,6 +28,19 @@ class Monarch implements Proxy
     public static function setApplicationName(?string $name): void {}
     public static function getApplicationName(): string {
         return static::$_veneerInstance->getApplicationName();
+    }
+    public static function setEnvironmentMode(Ref0 $mode): void {}
+    public static function getEnvironmentMode(): Ref0 {
+        return static::$_veneerInstance->getEnvironmentMode();
+    }
+    public static function isDevelopment(): bool {
+        return static::$_veneerInstance->isDevelopment();
+    }
+    public static function isTesting(): bool {
+        return static::$_veneerInstance->isTesting();
+    }
+    public static function isProduction(): bool {
+        return static::$_veneerInstance->isProduction();
     }
     public static function replaceContainer(ContainerPlugin $container): void {}
 };

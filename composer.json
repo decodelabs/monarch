@@ -12,6 +12,7 @@
         "php": "^8.4",
         "psr/container": "^2.0",
 
+        "decodelabs/enumerable": "^0.2.1",
         "decodelabs/exceptional": "^0.5.3",
         "decodelabs/veneer": "^0.12.6"
 

@@ -23,6 +23,7 @@ class Context
     public ContainerInterface $container;
 
     protected ?string $applicationName = null;
+    protected EnvironmentMode $environmentMode = EnvironmentMode::Production;
 
     public function __construct()
     {
@@ -41,6 +42,44 @@ class Context
     public function getApplicationName(): string
     {
         return $this->applicationName ?? 'My App';
+    }
+
+
+    public function setEnvironmentMode(
+        EnvironmentMode $mode
+    ): void {
+        $this->environmentMode = $mode;
+    }
+
+    public function getEnvironmentMode(): EnvironmentMode
+    {
+        return $this->environmentMode;
+    }
+
+    /**
+     * Is running in development mode
+     */
+    public function isDevelopment(): bool
+    {
+        return $this->environmentMode === EnvironmentMode::Development;
+    }
+
+    /**
+     * Is running in testing mode (or development)
+     */
+    public function isTesting(): bool
+    {
+        return
+            $this->environmentMode === EnvironmentMode::Testing ||
+            $this->environmentMode === EnvironmentMode::Development;
+    }
+
+    /**
+     * Is running in production mode
+     */
+    public function isProduction(): bool
+    {
+        return $this->environmentMode === EnvironmentMode::Production;
     }
 
 

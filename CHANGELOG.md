@@ -1,0 +1,4 @@
+## v0.1.0 (2025-04-08)
+* Built initial path handler
+* Implemented rudimentary stand-in PSR Container
+* Ported path aliasing from Genesis

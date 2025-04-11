@@ -1,3 +1,6 @@
+## v0.1.2 (2025-04-11)
+* Added hasAlias() to Paths container
+
 ## v0.1.1 (2025-04-09)
 * Added environment mode support
 

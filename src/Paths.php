@@ -116,6 +116,16 @@ class Paths
     }
 
     /**
+     * Check if a path alias exists
+     */
+    public function hasAlias(
+        string $alias
+    ): bool {
+        $alias = rtrim($alias, '/').'/';
+        return isset($this->aliases[$alias]);
+    }
+
+    /**
      * Resolve a path alias
      */
     public function resolve(

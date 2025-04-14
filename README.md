@@ -11,8 +11,6 @@
 
 Monarch provides a single shared source of truth for your PHP applications. It allow commonly referenced paths and items to be centralised into a predictable location, making it easier to manage accessing that data from code that needs to maintain minimal coupling to the rest of the application.
 
-_Get news and updates on the [DecodeLabs blog](https://blog.decodelabs.com)._
-
 ---
 
 ## Installation

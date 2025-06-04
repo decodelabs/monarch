@@ -13,6 +13,7 @@ use DecodeLabs\Monarch;
 use DecodeLabs\Veneer;
 use DecodeLabs\Veneer\Plugin;
 use Psr\Container\ContainerInterface;
+use Throwable;
 
 class Context
 {
@@ -24,6 +25,11 @@ class Context
 
     protected ?string $applicationName = null;
     protected EnvironmentMode $environmentMode = EnvironmentMode::Production;
+
+    /**
+     * @var array<string,ExceptionLogger>
+     */
+    protected array $exceptionLoggers = [];
 
     public function __construct()
     {
@@ -89,6 +95,30 @@ class Context
         $this->container = $container;
         Monarch::$container = $container;
         Veneer::setContainer($this->container);
+    }
+
+
+
+    public function registerExceptionLogger(
+        ExceptionLogger $logger
+    ): void {
+        $key = get_class($logger);
+        $this->exceptionLoggers[$key] = $logger;
+    }
+
+    public function unregisterExceptionLogger(
+        ExceptionLogger $logger
+    ): void {
+        $key = get_class($logger);
+        unset($this->exceptionLoggers[$key]);
+    }
+
+    public function logException(
+        Throwable $exception
+    ): void {
+        foreach ($this->exceptionLoggers as $logger) {
+            $logger->logException($exception);
+        }
     }
 }
 

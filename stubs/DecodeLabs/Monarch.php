@@ -12,6 +12,8 @@ use DecodeLabs\Monarch\Paths as PathsPlugin;
 use Psr\Container\ContainerInterface as ContainerPlugin;
 use DecodeLabs\Veneer\Plugin\Wrapper as PluginWrapper;
 use DecodeLabs\Monarch\EnvironmentMode as Ref0;
+use DecodeLabs\Monarch\ExceptionLogger as Ref1;
+use Throwable as Ref2;
 
 class Monarch implements Proxy
 {
@@ -43,4 +45,7 @@ class Monarch implements Proxy
         return static::$_veneerInstance->isProduction();
     }
     public static function replaceContainer(ContainerPlugin $container): void {}
+    public static function registerExceptionLogger(Ref1 $logger): void {}
+    public static function unregisterExceptionLogger(Ref1 $logger): void {}
+    public static function logException(Ref2 $exception): void {}
 };

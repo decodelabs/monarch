@@ -151,6 +151,25 @@ class Paths
         return $path;
     }
 
+    public function prettify(
+        string $path
+    ): string {
+        foreach($this->aliases as $alias => $target) {
+            $alias = ltrim(trim($alias, '/'), '@');
+
+            if(
+                str_contains($alias, '/') ||
+                !str_starts_with($path, $target)
+            ) {
+                continue;
+            }
+
+            return $alias.'://'.substr($path, strlen($target));
+        }
+
+        return $path;
+    }
+
     /**
      * Remove path alias
      */

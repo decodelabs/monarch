@@ -15,7 +15,7 @@ class Paths
 {
     public string $root {
         get {
-            if(isset($this->root)) {
+            if (isset($this->root)) {
                 return $this->root;
             }
 
@@ -31,7 +31,7 @@ class Paths
 
     public string $run {
         get {
-            if(isset($this->run)) {
+            if (isset($this->run)) {
                 return $this->run;
             }
 
@@ -47,16 +47,16 @@ class Paths
 
     public string $working {
         get {
-            if(isset($this->working)) {
+            if (isset($this->working)) {
                 return $this->working;
             }
 
-            if(
+            if (
                 isset($_SERVER['DOCUMENT_ROOT']) &&
                 !empty($_SERVER['DOCUMENT_ROOT'])
             ) {
                 $path = $_SERVER['DOCUMENT_ROOT'];
-            } elseif(false === ($path = getcwd())) {
+            } elseif (false === ($path = getcwd())) {
                 throw Exceptional::Runtime(
                     'Unable to determine current working directory'
                 );
@@ -74,11 +74,11 @@ class Paths
 
     public string $localData {
         get {
-            if(isset($this->localData)) {
+            if (isset($this->localData)) {
                 return $this->localData;
             }
 
-            return $this->localData = $this->root.'/data/local';
+            return $this->localData = $this->root . '/data/local';
         }
         set {
             $this->localData = rtrim($value, '/');
@@ -87,11 +87,11 @@ class Paths
 
     public string $sharedData {
         get {
-            if(isset($this->sharedData)) {
+            if (isset($this->sharedData)) {
                 return $this->sharedData;
             }
 
-            return $this->sharedData = $this->root.'/data/shared';
+            return $this->sharedData = $this->root . '/data/shared';
         }
         set {
             $this->sharedData = rtrim($value, '/');
@@ -101,7 +101,7 @@ class Paths
     /**
      * @var array<string,string>
      */
-    protected(set) array $aliases = [];
+    public protected(set) array $aliases = [];
 
     /**
      * Register a path alias
@@ -110,8 +110,8 @@ class Paths
         string $alias,
         string $path
     ): void {
-        $alias = rtrim($alias, '/').'/';
-        $path = rtrim($path, '/').'/';
+        $alias = rtrim($alias, '/') . '/';
+        $path = rtrim($path, '/') . '/';
         $this->aliases[$alias] = $this->resolve($path);
     }
 
@@ -121,7 +121,7 @@ class Paths
     public function hasAlias(
         string $alias
     ): bool {
-        $alias = rtrim($alias, '/').'/';
+        $alias = rtrim($alias, '/') . '/';
         return isset($this->aliases[$alias]);
     }
 
@@ -135,11 +135,11 @@ class Paths
             return $this->aliases[$path];
         }
 
-        if(
+        if (
             !str_ends_with($path, '/') &&
-            isset($this->aliases[$path.'/'])
+            isset($this->aliases[$path . '/'])
         ) {
-            return $this->aliases[$path.'/'];
+            return $this->aliases[$path . '/'];
         }
 
         foreach ($this->aliases as $alias => $target) {
@@ -154,17 +154,17 @@ class Paths
     public function prettify(
         string $path
     ): string {
-        foreach($this->aliases as $alias => $target) {
+        foreach ($this->aliases as $alias => $target) {
             $alias = ltrim(trim($alias, '/'), '@');
 
-            if(
+            if (
                 str_contains($alias, '/') ||
                 !str_starts_with($path, $target)
             ) {
                 continue;
             }
 
-            return $alias.'://'.substr($path, strlen($target));
+            return $alias . '://' . substr($path, strlen($target));
         }
 
         return $path;
@@ -176,7 +176,7 @@ class Paths
     public function removeAlias(
         string $alias
     ): void {
-        $alias = rtrim($alias, '/').'/';
+        $alias = rtrim($alias, '/') . '/';
         unset($this->aliases[$alias]);
     }
 }

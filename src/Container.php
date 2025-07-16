@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace DecodeLabs\Monarch;
 
 use DecodeLabs\Exceptional;
-use Psr\Container\ContainerExceptionInterface as ContainerException;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface as NotFoundException;
 
@@ -40,8 +39,8 @@ class Container implements ContainerInterface
      */
     public function get(
         string $id
-    ):  mixed {
-        if(isset($this->items[$id])) {
+    ): mixed {
+        if (isset($this->items[$id])) {
             /** @var T $output */
             $output = $this->items[$id];
             return $output;

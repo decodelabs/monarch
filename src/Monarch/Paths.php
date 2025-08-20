@@ -103,9 +103,6 @@ class Paths
      */
     public protected(set) array $aliases = [];
 
-    /**
-     * Register a path alias
-     */
     public function alias(
         string $alias,
         string $path
@@ -115,9 +112,6 @@ class Paths
         $this->aliases[$alias] = $this->resolve($path);
     }
 
-    /**
-     * Check if a path alias exists
-     */
     public function hasAlias(
         string $alias
     ): bool {
@@ -125,9 +119,6 @@ class Paths
         return isset($this->aliases[$alias]);
     }
 
-    /**
-     * Resolve a path alias
-     */
     public function resolve(
         string $path
     ): string {
@@ -170,9 +161,6 @@ class Paths
         return $path;
     }
 
-    /**
-     * Remove path alias
-     */
     public function removeAlias(
         string $alias
     ): void {

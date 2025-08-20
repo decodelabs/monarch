@@ -11,6 +11,10 @@
 
 Monarch provides a single shared source of truth for your PHP applications. It allow commonly referenced paths and items to be centralised into a predictable location, making it easier to manage accessing that data from code that needs to maintain minimal coupling to the rest of the application.
 
+It acts as the top level oversight for your entire application space and acts as an orchestrator for your application's container and services within.
+
+`Monarch` works in tandem with [Kingdom](https://github.com/decodelabs/kingdom) - it manages the _active_ `Kingdom` instance that in turn contains all of your application's services.
+
 ---
 
 ## Installation
@@ -29,12 +33,14 @@ For example:
 
 ```php
 use DecodeLabs\Monarch;
+$paths = Monarch::getPaths();
 
-Monarch::setApplicationName('My Cool App');
-Monarch::$paths->root = '/var/www/my-cool-app';
-Monarch::$paths->run = '/var/www/my-cool-app/dist';
-Monarch::$paths->localData = '/var/www/my-cool-app/data/local';
-Monarch::$paths->sharedData = '/var/www/my-cool-app/data/shared';
+$paths->root = '/var/www/my-cool-app';
+$paths->run = '/var/www/my-cool-app/dist';
+$paths->localData = '/var/www/my-cool-app/data/local';
+$paths->sharedData = '/var/www/my-cool-app/data/shared';
+
+Monarch::setKingdom(new MyKingdom());
 ```
 
 ### Path aliasing
@@ -42,42 +48,32 @@ Monarch::$paths->sharedData = '/var/www/my-cool-app/data/shared';
 Monarch allows you to define aliases for commonly used paths. This is useful for avoiding hardcoded paths in your codebase. `@root` and `@run` are automatically defined for you, but you can define your own aliases as needed.
 
 ```php
-use DecodeLabs\Monarch;
-
-Monarch::$paths->alias('@components', '@root/components');
-Monarch::$paths->alias('@assets', '@root/assets');
+$paths->alias('@components', '@root/components');
+$paths->alias('@assets', '@root/assets');
 ```
 You can then use these aliases in your code:
 
 ```php
-use DecodeLabs\Monarch;
-$path = Monarch::$paths->resolve('@components/MyComponent.php');
+$path = $paths->resolve('@components/MyComponent.php');
 // /var/www/my-cool-app/components/MyComponent.php
 ```
 
-### Container
+### Services
 
-Monarch attempts to centralise a PSR container for easy access to all components of your app.
-Due to the PSR spec not providing an interface for _setting_ items, care must be taken when storing objects as the container instance could be of any type; the only guarantee is that it implements `Psr\Container\ContainerInterface`.
-
-If you use `Genesis` to bootstrap your application, Monarch will contain a `Pandora` container, otherwise Monarch will use a simple stand-in container that implements the `Psr\Container\ContainerInterface` interface.
+Monarch provides a simple way to access `Kingdom`services from your application.
+Services must implement the Kingdom `Service` interface and may provide the ability to self-instantiate.
 
 ```php
-use DecodeLabs\Monarch;
-use DecodeLabs\Pandora\Container;
-
-if(Monarch::$container instanceof Container) {
-    Monarch::$container->bind('myService', new MyService());
-}
+$service = Monarch::getService(MyService::class);
 ```
 
-If you are working in a `Fabric` app, it is better to reference `Fabric::$container` as that is guaranteed to be a `Pandora` container. However libraries should not be coupled to `Fabric` and should use the read-oriented methods of the Monarch interface instead.
+This method is a simple wrapper around the `getService()` method of the active `Kingdom` instance. It will only work if you supply an instance of the `Kingdom` interface in your bootstrap.
 
-```php
-use DecodeLabs\Monarch;
+While this method is useful for quick access to services, it is not recommended for regular use as it is essentially an implementation of the Service Locator pattern. It _works_, but is inflexible and can lead to tight coupling between your code and the container.
 
-$service = Monarch::$container->get('myService');
-```
+Instead, the `Kingdom` instance provided to `Monarch` is also made available to [Slingshot](https://github.com/decodelabs/slingshot) which can then be used to automatically inject services into your code.
+
+Many common DecodeLabs libraries use `Slingshot` in their architecture and allow arbitrary constructor parameters to be handled seamlessly.
 
 ## Licensing
 

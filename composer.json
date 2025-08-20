@@ -10,11 +10,11 @@
         } ],
     "require": {
         "php": "^8.4",
-        "psr/container": "^2.0",
+        "psr/container": "^2.0.2",
 
-        "decodelabs/enumerable": "^0.2.1",
-        "decodelabs/exceptional": "^0.6",
-        "decodelabs/veneer": "^0.12.6"
+        "decodelabs/enumerable": "^0.2.8",
+        "decodelabs/exceptional": "^0.6.3",
+        "decodelabs/kingdom": "^0.1.0"
 
     },
     "require-dev": {
@@ -22,15 +22,15 @@
     },
     "autoload": {
         "psr-4": {
-            "DecodeLabs\\Monarch\\": "src/"
+            "DecodeLabs\\Monarch\\": "src/Monarch/"
         },
         "files": [
-            "src/Context.php"
+            "src/Monarch.php"
         ]
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.1.x-dev"
+            "dev-develop": "0.2.x-dev"
         }
     },
     "config": {

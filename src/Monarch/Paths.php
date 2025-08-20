@@ -164,7 +164,7 @@ class Paths
                 continue;
             }
 
-            return $alias . '://' . substr($path, strlen($target));
+            return '@' . $alias . ':/' . substr($path, strlen($target));
         }
 
         return $path;

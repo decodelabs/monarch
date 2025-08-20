@@ -1,8 +1,10 @@
 <?php
+
 /**
  * This is a stub file for IDE compatibility only.
  * It should not be included in your projects.
  */
+
 namespace DecodeLabs;
 
 use DecodeLabs\Veneer\Proxy as Proxy;
@@ -27,25 +29,25 @@ class Monarch implements Proxy
     /** @var ContainerPlugin|PluginWrapper<ContainerPlugin> $container */
     public static ContainerPlugin|PluginWrapper $container;
 
-    public static function setApplicationName(?string $name): void {}
-    public static function getApplicationName(): string {
-        return static::$_veneerInstance->getApplicationName();
-    }
-    public static function setEnvironmentMode(Ref0 $mode): void {}
-    public static function getEnvironmentMode(): Ref0 {
-        return static::$_veneerInstance->getEnvironmentMode();
-    }
-    public static function isDevelopment(): bool {
+    public static function isDevelopment(): bool
+    {
         return static::$_veneerInstance->isDevelopment();
     }
-    public static function isTesting(): bool {
+    public static function isTesting(): bool
+    {
         return static::$_veneerInstance->isTesting();
     }
-    public static function isProduction(): bool {
+    public static function isProduction(): bool
+    {
         return static::$_veneerInstance->isProduction();
     }
-    public static function replaceContainer(ContainerPlugin $container): void {}
-    public static function registerExceptionLogger(Ref1 $logger): void {}
-    public static function unregisterExceptionLogger(Ref1 $logger): void {}
-    public static function logException(Ref2 $exception): void {}
+    public static function registerExceptionLogger(Ref1 $logger): void
+    {
+    }
+    public static function unregisterExceptionLogger(Ref1 $logger): void
+    {
+    }
+    public static function logException(Ref2 $exception): void
+    {
+    }
 };

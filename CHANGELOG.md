@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Unreleased
+--
+
+---
+
+### [v0.2.0](https://github.com/decodelabs/monarch/commits/v0.2.0) - 20th August 2025
+
 - Swapped Container plugin for active Kingdom instance
 - Moved applicationName to Kingdom interface
 - Added Environment and Build interfaces
@@ -12,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Kingdom Service support
 - Removed Veneer dependency
 - Converted to static class implementation
+
+[Full list of changes](https://github.com/decodelabs/monarch/compare/v0.1.5...v0.2.0)
 
 ---
 

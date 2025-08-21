@@ -224,17 +224,19 @@ class Monarch
             return self::$serviceCache[$class];
         }
 
-        try {
+        if (isset(static::$kingdom)) {
             return self::$serviceCache[$class] = static::$kingdom->getService($class);
-        } catch (LogicException $e) {
-            if (
-                class_exists($class) &&
-                is_a($class, PureService::class, true)
-            ) {
-                return self::$serviceCache[$class] = $class::providePureService();
-            }
-
-            throw $e;
         }
+
+        if (
+            class_exists($class) &&
+            is_a($class, PureService::class, true)
+        ) {
+            return self::$serviceCache[$class] = $class::providePureService();
+        }
+
+        throw Exceptional::Logic(
+            'No kingdom registered'
+        );
     }
 }

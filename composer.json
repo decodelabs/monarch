@@ -14,7 +14,7 @@
 
         "decodelabs/enumerable": "^0.2.8",
         "decodelabs/exceptional": "^0.6.3",
-        "decodelabs/kingdom": "^0.1.0"
+        "decodelabs/kingdom": "^0.2"
 
     },
     "require-dev": {

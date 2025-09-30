@@ -19,6 +19,8 @@ It acts as the top level oversight for your entire application space and acts as
 
 ## Installation
 
+This package requires PHP 8.4 or higher.
+
 Install via Composer:
 
 ```bash

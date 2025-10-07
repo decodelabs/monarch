@@ -72,6 +72,17 @@ class Paths
         }
     }
 
+    public ?string $subjectRoot {
+        set {
+            if ($value !== null) {
+                $value = rtrim($value, '/');
+                $this->alias('@subject-root', $value);
+            }
+
+            $this->subjectRoot = $value;
+        }
+    }
+
     public string $localData {
         get {
             if (isset($this->localData)) {

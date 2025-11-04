@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @package Monarch
- * @license http://opensource.org/licenses/MIT
+ * Monarch
+ * @license https://opensource.org/licenses/MIT
  */
 
 declare(strict_types=1);

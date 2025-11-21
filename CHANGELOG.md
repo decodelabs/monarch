@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Unreleased
 - Improved doc comment headers
+- Added AGENTS.md
+- Integrated Chorus dev dependency
 
 ---
 
@@ -94,3 +96,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Built initial path handler
 - Implemented rudimentary stand-in PSR Container
 - Ported path aliasing from Genesis
+
